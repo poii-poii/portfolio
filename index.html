@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Awesome Website!!!</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #ff00ff, #00ff00, #ff0000);
+            color: yellow;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 24px;
+            text-align: center;
+            overflow: hidden;
+            cursor: url('https://cur.cursors-4u.net/cursors/cur-11/cur1054.cur'), auto;
+        }
+        h1 {
+            font-size: 48px;
+            text-shadow: 5px 5px 10px cyan;
+            animation: blink 0.5s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        .content {
+            margin: 50px;
+            transform: rotate(5deg);
+        }
+        button {
+            background: purple;
+            color: lime;
+            font-size: 20px;
+            padding: 20px;
+            border: 5px dotted orange;
+            transform: rotate(-10deg);
+            position: absolute;
+            animation: move 2s infinite;
+        }
+        @keyframes move {
+            0% { left: 10%; top: 10%; }
+            50% { left: 80%; top: 80%; }
+            100% { left: 10%; top: 10%; }
+        }
+        .popup {
+            position: fixed;
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 20px;
+            border: 10px solid gold;
+            font-size: 30px;
+            z-index: 1000;
+            animation: shake 0.2s infinite;
+        }
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(10px, 10px); }
+            100% { transform: translate(0, 0); }
+        }
+        .hidden { display: none; }
+        img {
+            position: absolute;
+            width: 100px;
+            animation: spin 1s infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        .flash1 {
+            animation: flash1 0.3s infinite;
+        }
+        @keyframes flash1 {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .flash2 {
+            animation: flash2 0.7s infinite;
+        }
+        @keyframes flash2 {
+            0% { background-color: blue; }
+            50% { background-color: green; }
+            100% { background-color: blue; }
+        }
+        .rotate-text {
+            animation: rotate 1s infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .shake-page {
+            animation: pageShake 0.1s infinite;
+        }
+        @keyframes pageShake {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(5px, 5px); }
+            50% { transform: translate(-5px, -5px); }
+            75% { transform: translate(5px, -5px); }
+            100% { transform: translate(0, 0); }
+        }
+        .glitch {
+            position: relative;
+            animation: glitch 0.3s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(5deg); }
+            40% { transform: skew(-5deg); }
+            60% { transform: skew(3deg); }
+            80% { transform: skew(-3deg); }
+            100% { transform: skew(0deg); }
+        }
+    </style>
+</head>
+<body class="shake-page">
+    <audio id="bgm" src="https://www.myinstants.com/media/sounds/trololo.mp3" autoplay loop></audio>
+    <h1 class="glitch">Bienvenue sur LE SITE de POIIPOII!</h1>
+    <div class="content">
+        <p class="rotate-text">CLICK BUTTONS TO WIN PRIZES!!!</p>
+        <button onclick="spawnPopup()">BONJOUR</button>
+        <button onclick="alert('WRONG BUTTON! TRY AGAIN!')">CLIQUE !!</button>
+        <button onclick="document.body.style.background = 'black';">BOUTON SECRET</button>
+    </div>
+    <div id="popup1" class="popup hidden">PORTFOLIO POIIPOII! <button onclick="spawnAnotherPopup()">Close</button></div>
+    <div id="popup2" class="popup hidden">ERROR 404: HEIN?????</div>
+    <div id="popup3" class="popup hidden">EMBAUCHEZ MOI!</div>
+    <div id="loadingOverlay" class="hidden" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); color: white; display: flex; justify-content: center; align-items: center; font-size: 30px;">EMBAUCHEZ MOI!!!!!!!!</div>
+    <div class="flash1" style="position: absolute; top: 20%; left: 20%; width: 100px; height: 100px; background: red;"></div>
+    <div class="flash2" style="position: absolute; top: 50%; left: 50%; width: 150px; height: 150px; background: yellow;"></div>
+    <div id="movingDiv" style="position: absolute; width: 50px; height: 50px; background: pink;">AAAAAAAAAAAA!</div>
+    <p id="changingText" class="rotate-text">This text will change!</p>
+    <p id="counter">ZEBI: 0</p>
+    <img src="https://i.giphy.com/media/3o7TKSjRrfIPjeiNas/giphy.gif" style="top: 10%; left: 10%;">
+    <img src="https://i.giphy.com/media/3o7TKSjRrfIPjeiNas/giphy.gif" style="top: 80%; left: 80%;">
+    <script>
+        // Existing script
+        function spawnPopup() {
+            const popup = document.getElementById('popup1');
+            popup.classList.remove('hidden');
+            popup.style.top = Math.random() * 80 + '%';
+            popup.style.left = Math.random() * 80 + '%';
+            alert('VOUS AVEZ GAGNEZ UN IPHONE!!!!!!');
+        }
+        setTimeout(() => {
+            alert('CHARGEMENT EN COURS VEUILLEZ ATTENDRE 10 minutes...');
+            setTimeout(() => {
+                spawnPopup();
+            }, 10000);
+        }, 5000);
+        window.addEventListener('mousemove', () => {
+            if (Math.random() < 0.1) {
+                alert('NE BOUGEZ PLUS LE CURSEUR!!!!!');
+            }
+        });
+        window.addEventListener('click', () => {
+            const img = document.createElement('img');
+            img.src = 'https://i.giphy.com/media/3o7TKSjRrfIPjeiNas/giphy.gif';
+            img.style.top = Math.random() * 80 + '%';
+            img.style.left = Math.random() * 80 + '%';
+            document.body.appendChild(img);
+            multiplyElements(img);
+        });
+
+        // Previous chaotic features
+        const popups = ['popup1', 'popup2', 'popup3'];
+        function showRandomPopup() {
+            const randomIndex = Math.floor(Math.random() * popups.length);
+            const popup = document.getElementById(popups[randomIndex]);
+            popup.classList.remove('hidden');
+            setTimeout(() => {
+                popup.classList.add('hidden');
+            }, 3000);
+        }
+        function triggerPopup() {
+            showRandomPopup();
+            setTimeout(triggerPopup, Math.random() * 10000 + 5000);
+        }
+        triggerPopup();
+
+        function spawnAnotherPopup() {
+            showRandomPopup();
+        }
+
+        function showLoading() {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.classList.remove('hidden');
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, Math.random() * 7000 + 3000);
+        }
+        function triggerLoading() {
+            showLoading();
+            setTimeout(triggerLoading, Math.random() * 15000 + 10000);
+        }
+        triggerLoading();
+
+        function disableInteractions() {
+            document.addEventListener('click', preventClick, true);
+            setTimeout(() => {
+                document.removeEventListener('click', preventClick, true);
+            }, Math.random() * 3000 + 2000);
+        }
+        function preventClick(event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        function triggerDisable() {
+            disableInteractions();
+            setTimeout(triggerDisable, Math.random() * 20000 + 10000);
+        }
+        triggerDisable();
+
+        const cursors = ['wait', 'crosshair', 'not-allowed', 'progress', 'help'];
+        function changeCursor() {
+            const randomCursor = cursors[Math.floor(Math.random() * cursors.length)];
+            document.body.style.cursor = randomCursor;
+            setTimeout(() => {
+                document.body.style.cursor = 'auto';
+            }, Math.random() * 5000 + 2000);
+        }
+        function triggerCursorChange() {
+            changeCursor();
+            setTimeout(triggerCursorChange, Math.random() * 15000 + 5000);
+        }
+        triggerCursorChange();
+
+        function randomAlert() {
+            if (Math.random() < 0.5) {
+                alert('VOTRE ORDINATEUR A UN VIRUS!!!!!');
+            } else {
+                confirm('VOULEZ VOUS CONTINUER A UTILISER LE SITEWEB?');
+            }
+        }
+        function triggerAlert() {
+            randomAlert();
+            setTimeout(triggerAlert, Math.random() * 30000 + 10000);
+        }
+        triggerAlert();
+
+        function randomScroll() {
+            window.scrollTo(0, Math.random() * document.body.scrollHeight);
+        }
+        function triggerScroll() {
+            randomScroll();
+            setTimeout(triggerScroll, Math.random() * 10000 + 5000);
+        }
+        triggerScroll();
+
+        const movingDiv = document.getElementById('movingDiv');
+        function moveDiv() {
+            movingDiv.style.top = Math.random() * 90 + '%';
+            movingDiv.style.left = Math.random() * 90 + '%';
+        }
+        setInterval(moveDiv, 1000);
+
+        const texts = ["BONJOUR!", "BIENVENUE!", "BONJOUR ENCORE!", "CLIQUEZ ICI!", "WTF!", "EMBAUCHEZ MOI!!!"];
+        function changeText() {
+            const changingText = document.getElementById('changingText');
+            changingText.textContent = texts[Math.floor(Math.random() * texts.length)];
+        }
+        setInterval(changeText, 2000);
+
+        function invertColors() {
+            document.body.style.filter = 'invert(1)';
+            setTimeout(() => {
+                document.body.style.filter = 'none';
+            }, Math.random() * 5000 + 2000);
+        }
+        function triggerInvert() {
+            invertColors();
+            setTimeout(triggerInvert, Math.random() * 20000 + 10000);
+        }
+        triggerInvert();
+
+        // New chaotic features
+        function randomBackground() {
+            const colors = ['red', 'blue', 'green', 'purple', 'orange', 'pink'];
+            document.body.style.background = colors[Math.floor(Math.random() * colors.length)];
+        }
+        function triggerBackgroundChange() {
+            randomBackground();
+            setTimeout(triggerBackgroundChange, Math.random() * 3000 + 1000);
+        }
+        triggerBackgroundChange();
+
+        let count = 0;
+        function updateCounter() {
+            count += Math.floor(Math.random() * 10) + 1;
+            document.getElementById('counter').textContent = `CHAOS COUNTER: ${count}`;
+        }
+        setInterval(updateCounter, 500);
+
+        function multiplyElements(element) {
+            if (Math.random() < 0.3) {
+                const clone = element.cloneNode(true);
+                clone.style.top = Math.random() * 80 + '%';
+                clone.style.left = Math.random() * 80 + '%';
+                document.body.appendChild(clone);
+            }
+        }
+    </script>
+</body>
+</html>
